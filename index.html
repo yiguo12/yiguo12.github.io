@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>使用者註冊頁面</title>
+</head>
+<body>
+    <header>
+        <h1>註冊頁面</h1>
+    </header>
+    <main>
+        <div class="form-container">
+            <h1 style="text-align: center;">建立新帳號</h1>
+            <form action="/submit" method="POST">
+                <fieldset>
+                    <legend>基本資訊</legend>
+                    <label for="username">使用者名稱</label>
+                    <input type="text" id="username" name="username" placeholder="請輸入使用者名稱" required style="box-sizing: border-box;">  
+                    <label for="email">電子郵件</label>
+                    <input type="email" id="email" name="email" placeholder="請輸入電子郵件" required style="box-sizing: border-box;">
+                </fieldset>
+                <fieldset>
+                    <legend>安全資訊</legend>
+                    <label for="password">密碼</label>
+                    <input type="password" id="password" name="password" placeholder="請輸入密碼" required style="box-sizing: border-box;">
+                    <div class="password-strength" id="password-strength">密碼強度：弱</div>
+                    
+                    <label for="confirm-password">確認密碼</label>
+                    <input type="password" id="confirm-password" name="confirm-password" placeholder="再次輸入密碼" required style="box-sizing: border-box;">
+                </fieldset>
+                <fieldset>
+                    <legend>個人資訊</legend>
+                    <label for="birthday">生日</label>
+                    <input type="date" id="birthday" name="birthday" required style="box-sizing: border-box; max-width: 100%;">
+
+                    <fieldset>
+                        <legend>性別</legend>
+                        <div class="form-group-inline" style="display: flex; gap: 10px; flex-wrap: nowrap;">
+                            <input type="radio" id="male" name="gender" value="male" required>
+                            <label for="male">男</label>
+                            <input type="radio" id="female" name="gender" value="female" required>
+                            <label for="female">女</label>
+                            <input type="radio" id="other" name="gender" value="other" required>
+                            <label for="other">其他</label>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>興趣</legend>
+                        <div class="form-group-inline" >
+                            <input type="checkbox" id="sports" name="interests" value="sports">
+                            <label for="sports">運動</label>
+                            <input type="checkbox" id="music" name="interests" value="music">
+                            <label for="music">音樂</label>
+                            <input type="checkbox" id="reading" name="interests" value="reading">
+                            <label for="reading">閱讀</label>
+                            <input type="checkbox" id="design" name="interests" value="design">
+                            <label for="design">程式設計</label>
+                            <input type="checkbox" id="page" name="interests" value="page">
+                            <label for="page">網頁設計</label>
+                            <input type="checkbox" id="smart" name="interests" value="smart">
+                            <label for="smart">人工智慧</label>
+                            <input type="checkbox" id="science" name="interests" value="science">
+                            <label for="science">資料科學</label>
+                        </div>
+                    </fieldset>
+
+                    <label for="bio">自我介紹</label>
+                    <textarea id="bio" name="bio" rows="4" placeholder="請輸入自我介紹" style="box-sizing: border-box; max-width: 100%;"></textarea>
+                </fieldset>
+                <button type="submit">註冊</button>
+            </form>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2025 註冊頁面</p>
+    </footer>
+    <script>
+        const passwordInput = document.getElementById('password');
+        const passwordStrength = document.getElementById('password-strength');
+
+        passwordInput.addEventListener('input', () => {
+            const value = passwordInput.value;
+            if (value.length < 6) {
+                passwordStrength.textContent = '密碼強度：弱';
+                passwordStrength.className = 'password-strength weak';
+            } else if (value.length < 10) {
+                passwordStrength.textContent = '密碼強度：中';
+                passwordStrength.className = 'password-strength medium';
+            } else {
+                passwordStrength.textContent = '密碼強度：強';
+                passwordStrength.className = 'password-strength strong';
+            }
+        });
+    </script>
+</body>
+</html>
