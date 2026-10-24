@@ -1,0 +1,14 @@
+{
+  "name": "waymark-travel-bot",
+  "version": "0.1.0",
+  "private": true,
+  "description": "群組旅遊 Bot 前端互動原型",
+  "scripts": {
+    "build": "python3 scripts/build.py",
+    "test": "node tests/conversation-flow.cjs && node tests/results.cjs",
+    "start": "python3 -m http.server 8000"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
