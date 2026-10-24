@@ -9,6 +9,9 @@ function click(s,action,scope){const b={dataset:{action,scope}},target={closest:
   click(s,'choose-scope',scope);assert.equal(s.ids.modalroot.innerHTML,'');assert(s.run('state.active'));assert(s.run('busy'));assert(!s.run('resultsOpen'));assert(s.ids.timeline.innerHTML.includes('正在整理這次的對話'));assert.equal(s.run('state.messages.filter(m=>m.type==="processing"&&m.status==="working").length'),1);
   await flush(s);assert(s.run('resultsOpen'));assert.equal(s.run('state.plan.days.flatMap(d=>d.items).length'),scope==='all'?6:3);assert.equal(s.run('state.messages.filter(m=>m.type==="processing"&&m.status==="done").length'),1);assert(s.ids.resultsroot.innerHTML.includes('整理成果'));assert(s.ids.resultsroot.innerHTML.includes('aria-label="收起整理成果"'));
   const count=s.run('state.messages.length');click(s,'close-results');assert(!s.run('resultsOpen'));assert.equal(s.run('state.messages.length'),count);assert(s.run('state.messages.some(m=>m.type==="organized")'));assert(s.run('state.messages.some(m=>m.type==="trip")'));assert(s.run('state.active'));click(s,'open-results');assert(s.run('resultsOpen'));assert.equal(s.run('state.messages.length'),count);
+  for(const phrase of ['第三天11點出門','第三天 11 點出門','第3天11:30出門']){
+   const r=s.run('propose('+JSON.stringify(phrase)+')');assert(r.changes.some(c=>c.after===(phrase.includes(':30')?'11:30 開始':'11:00 開始')),phrase);
+  }
  }
  const s=setup();click(s,'call');click(s,'choose-scope','all');s.run('stop()');await flush(s);assert(!s.run('resultsOpen'));assert(!s.run('state.active'));assert.equal(s.run('state.messages.filter(m=>m.type==="processing"&&m.status==="cancelled").length'),1);
  console.log('PASS: real click handlers for call → one-tap scope → immediate modal dismissal → inline processing → automatic result expansion; both scopes; history retained on close/reopen; cancellation prevents redirect.');
