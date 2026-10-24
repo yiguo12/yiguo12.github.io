@@ -1,5 +1,7 @@
 # Waymark｜群組旅遊 Bot
 
+[直接開啟線上原型](https://yiguo12.github.io/waymark-travel-bot/)
+
 讓朋友在原本的群組自然討論，把零散分享整理成可以一起確認、修改的旅行安排。
 
 ![同一個對話中的整理成果](assets/in-chat-results.svg)
