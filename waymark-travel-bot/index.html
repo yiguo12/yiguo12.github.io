@@ -46,7 +46,7 @@ function initial(){return {schema:2,active:false,scope:null,startedAt:null,start
  {id:'seed-mia',type:'text',who:'Mia',text:'I saved the same place! Cafes in Nakazakicho on day 3, then Umeda in the evening?',time:'13:46'},
  {id:'seed-usj',type:'text',who:'Ben',text:'Universal Studios on day 2! Let’s give it a full day.',time:'13:47'},
  {id:'seed-yuki',type:'text',who:'Yuki',text:'We also mentioned Osaka Castle and Dotonbori... So many shares. I can’t find them now.',time:'13:48'}]}}
-const STORE='waymark-product-bot-en-1';let state;try{const s=JSON.parse(localStorage.getItem(STORE));state=s?.schema===2?s:initial()}catch{state=initial()}
+const STORE='waymark-product-bot-en-1'+(new URLSearchParams(location.search).get('demo')==='video'?'-video-v1':'');let state;try{const s=JSON.parse(localStorage.getItem(STORE));state=s?.schema===2?s:initial()}catch{state=initial()}
 let drawer=null,editPlan=null,dirty=false,selectedDay=0,drawerTab='plan',pendingMention='',busy=false,job=0,toastTimer=null,priorFocus=null;
 function now(){return new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit',hour12:false,timeZone:'Asia/Taipei'})}
 function save(){try{localStorage.setItem(STORE,JSON.stringify(state))}catch{}}
